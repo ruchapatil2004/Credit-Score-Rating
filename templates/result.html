@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/LoanTrack.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.3.2/markdown-it.min.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="zoom-box">
+            <div class="logo" id="nam">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/018/742/015/small_2x/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.png"
+                    alt="Credit Ease Logo">&nbsp&nbsp&nbsp{{profile[2]}} {{profile[3]}}
+            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="dashboard-tab" data-toggle="tab" href="#dashboard" role="tab"
+                        aria-controls="dashboard" aria-selected="true">Credit Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                        aria-controls="profile" aria-selected="false">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="accountinfo-tab" data-toggle="tab" href="#accountinfo" role="tab"
+                        aria-controls="accountinfo" aria-selected="false">Account Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                        aria-controls="contact" aria-selected="false">Loan Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="enquiry-tab" data-toggle="tab" href="#tracker" role="tab"
+                        aria-controls="enquiry" aria-selected="false">Loan Tracker</a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-primary" onclick="download()">Download</button>
+            <a href="{{ url_for('login') }}" id="checkScoreBtn" class="btn btn-primary">Sign Out</a>
+        </nav>
+    </header>
+
+    <div class="m-5">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                <main class="dashboard">
+                    <section class="credit-score">
+                        <div class="credit-score-header">
+                            <h2>Credit Score</h2>
+                        </div>
+                        <div class="score-circle">
+                            <canvas id="scoreChart"></canvas>
+                            <div class="score-value" id="score">{{credit_score[0]}}</div>
+                        </div>
+                        <p class="score-label" id="grade"></p>
+                        <div class="score-details" >
+                            <div class="detail-item" id="des">
+                            </div>
+                        </div>
+                    </section>
+                    <section class="score-trend">
+                        <div id="cc">{{cc}}</div>
+                        <h2>Score Trend (2024)</h2>
+                        <canvas id="trendChart"></canvas>
+                    </section>
+
+                </main>
+                <main class="dashboard">
+                    <div id="ai" class="credit-score">{{user}}</div>
+                </main>
+                <center>
+                    <button class="btn btn btn-outline-primary" id="tip">Generate report</button>
+                </center>
+                <main class="dashboard">
+                    <div class="suggestion profile-info-container"></div>
+                </main>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile">
+                <div class="profile-info-container">
+                    <div class="profile-info-header">
+                        <!-- <h2>Profile Information</h2> -->
+                    </div>
+                    <div class="profile-info-content">
+                        <div class="personal-details">
+                            <h3>PERSONAL DETAILS</h3>
+                            <div class="personal-details-item">
+                                <img src="https://static.vecteezy.com/system/resources/thumbnails/018/742/015/small_2x/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.png"
+                                    alt="" height="150px" style="float: left;margin-right: 2rem;">
+                                <p><strong>Age:</strong> {{profile[10]}}</p>
+                                <p><strong>Name:</strong> {{profile[2]}} {{profile[3]}}</p>
+                                <p><strong>Date of Birth:</strong> {{profile[4]}}</p>
+                                <p><strong>Marital Status:</strong> {{profile[11]}}</p>
+                            </div>
+                        </div>
+                        <div class="address-details">
+                            <h3>ADDRESS DETAILS</h3>
+                            <div class="address-details-list">
+                                <div class="address-details-item">
+                                    <p><strong>Category:</strong> Residence Address</p>
+                                    <p><strong>Address:</strong> {{profile[5]}} </p>
+                                </div>
+                                <div class="address-details-item">
+                                    <p><strong>State:</strong> {{profile[6]}}</p>
+                                    <p><strong>City:</strong> {{profile[7]}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="email-details">
+                            <h3>CONTACT DETAILS</h3>
+                            <div class="email-details-list">
+                                <p><strong>Email ID:</strong> {{profile[9]}}</p>
+                                <p><strong>Telephone Number:</strong> +91 {{profile[8]}}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="identification-details">
+                            <h3>IDENTIFICATION DETAILS</h3>
+                            <div class="identification-details-item">
+                                <p><strong>Identification Type:</strong> Income Tax PAN Card(e)</p>
+                                <p><strong>ID Number:</strong> BIMPR8931P</p>
+                                <p><strong>Issue Date:</strong> --</p>
+                                <p><strong>Expiry Date:</strong> --</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="contact-employment-container">
+                    <div class="employment-details">
+                        <h3>EMPLOYMENT DETAILS</h3>
+                        <div class="employment-details-list">
+                            <div class="employment-detail-item">
+                                <p><strong>Employement Status:</strong> {{profile[14]}}</p>
+                                <p><strong>Occupation:</strong> {{profile[13]}}</p>
+                                <p><strong>Income:</strong> ₹ {{profile[15]}}</p>
+                            </div>
+                            <div class="employment-detail-item">
+                                <p><strong>HouseHold Income:</strong> ₹ {{profile[15]}}</p>
+                                <p><strong>Income Source:</strong> {{profile[16]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="accountinfo" role="tabpanel" aria-labelledby="accountinfo-tab">
+                <div class="account-info-container">
+                    <div class="account-info-header">
+                        <!-- <h2>Account Information</h2> -->
+                    </div>
+                    <div class="account-info-content">
+                        
+                        <div class="account-details-container">
+                            <div class="account-details-header">
+                                <h3>ACCOUNT DETAILS</h3><br>
+                            </div>
+                            <div class="account-details-list">
+                                <div class="account-detail-item">
+                                    <p><strong>Credit Limit:</strong> ₹{{credit[4]}}</p>
+                                </div>
+                                <div class="account-detail-item">
+                                    <p><strong>Total Credit Accounts:</strong> {{credit[2]}}</p>
+                                </div>
+                                <div class="account-detail-item">
+                                    <p><strong>Current Balance:</strong> ₹{{credit[5]}}</p>
+                                </div>
+                                <div class="account-detail-item">
+                                    <p><strong>Accounts In Deliquency:</strong> {{credit[3]}}</p>
+                                </div>
+                            </div>
+                        </div><br><br>
+                        <div class="account-list">
+                            <div class="account-item">
+                                <div class="account-details">
+                                    <p><strong>Hard Inquries:</strong> {{inquiry[2]}}</p>
+                                    <p><strong>Total Debt:</strong> ₹{{loan[0]}}</p>
+                                    <p><strong>Credit Utilization Ratio:</strong> {{credit[6]}}</p>
+                                </div>
+                                <div class="account-status">
+                                    <p><strong>Account Number</strong></p>
+                                    <p>{{profile[1]}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <section class="enquiry-section">
+                    <div class="enquiry-container">
+                        <div class="enquiry-details">
+                            <h2>Loan History</h2>
+                            <table>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Term</th>
+                                    <th>Rate</th>
+                                    <th>Monthly Payment</th>
+                                    <th>Status</th>
+                                    <th>Balance</th>
+                                </tr>
+                                {% for loan in allloan %}
+                                <tr>
+                                    <td>{{ loan[2] }}</td>
+                                    <td>{{ loan[1] }}</td>
+                                    <td>{{ loan[3] }}</td>
+                                    <td>{{ loan[4] * 100 }}</td>
+                                    <td>{{ loan[5] }}</td>
+                                    <td>{{ loan[6] }}</td>
+                                    <td>{{ loan[7] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="tab-pane fade" id="tracker" role="tabpanel" aria-labelledby="enquiry-tab">
+                <section class="enquiry-section">
+                    <center>
+                        <h1>Loan Payment Tracker</h1>
+                    </center>
+                    <div class="container">
+                        <div id="track">{{track}}</div>
+                        <div id="loan-trackers"></div>
+                    </div>
+                </section>
+            </div>
+
+
+        </div>
+    </div>
+
+    <section>
+        <!-- Chatbot -->
+        <div class="chatbot-container">
+            <div class="chatbot-icon">
+                <i class="fas fa-comment-alt"></i>
+            </div>
+            <div class="chatbot-window">
+                <div class="chatbot-header">
+                    <h3>How can I assist you ?</h3>
+                    <div class="chatbot-close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="chatbot-content"></div>
+                <!-- response of chatbot -->
+                <div class="chatbot-input">
+                    <input type="text" placeholder="Type your message...">
+                    <button class="chatbot-send">Send</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="chatbot-container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

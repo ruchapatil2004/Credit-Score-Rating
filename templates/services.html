@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+</head>
+<body>
+    <header class="zoom-box">
+        <nav>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/rupee.png') }}" alt="Credit Ease Logo">
+                Innov8ors
+            </div>
+            
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('team') }}">Team</a></li>
+                <li><a href="{{ url_for('services') }}">Services</a></li>
+                <li><a href="{{ url_for('login') }}" id="getStartedBtn" class="btn btn-primary">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="services">
+        <h2>What We Offer</h2>
+        <div class="service-cards">
+            <div class="service-card zoom-box">
+                <i class="fas fa-search"></i>
+                <img src="{{ url_for('static', filename='img/speedometer.png') }}" alt="logo" class="card-logo"><br>
+                <h3>Credit Score</h3><br>
+                <p>Track and improve your credit score with our easy-to-use analysis tools.</p>
+            </div>
+            <div class="service-card zoom-box">
+                <i class="fas fa-laptop-code"></i>
+                <img src="{{ url_for('static', filename='img/credit-score-report.png') }}" alt="logo" class="card-logo"><br><br>
+                <h3>Credit Report</h3><br>
+                <p>Get a snapshot of your credit history and status instantly.</p>
+            </div>
+            
+            <div class="service-card zoom-box">
+                <i class="fas fa-code"></i>
+                <img src="{{ url_for('static', filename='img/credit-improvement.png') }}" alt="logo" class="card-logo"><br><br>
+                <h3>Credit Score Improvement</h3><br>
+                <p>Effective tips and strategies to boost your credit score quickly.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

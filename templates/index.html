@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovative AI for Credit Evaluation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+  <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.3.2/markdown-it.min.js" defer></script>
+</head>
+
+<body>
+  <header class="zoom-box">
+    <nav>
+      <div class="logo">
+        <img src="{{ url_for('static', filename='img/rupee.png') }}" alt="Credit Ease Logo">
+        Innov8ors
+      </div>
+
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('team') }}">Team</a></li>
+        <li><a href="{{ url_for('services') }}">Services</a></li>
+        <li><a href="{{ url_for('login') }}" id="getStartedBtn" class="btn btn-primary">Get Started</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Innovative AI for<br><span class="highlight"> Credit Evaluation</span></h1>
+        <p>Get A.I. powered credit score and tips,<br>based on financial details</p>
+        <a href="{{ url_for('login') }}" id="checkScoreBtn" class="btn btn-primary btn-large">Check Your Score</a>
+      </div>
+
+      <div class="hero-image zoom-box">
+        <img src="https://www.familycu.com/wp-content/uploads/2023/05/Animated_OdometerGIF.gif"
+          alt="Credit Ease Illustration">
+      </div>
+    </section>
+    
+  </main>
+  <div id="chatbot-container"></div>
+</body>
+
+</html>

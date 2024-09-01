@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header class="zoom-box">
+        <nav >
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/rupee.png') }}" alt="Credit Ease Logo">
+                Innov8ors
+            </div>
+            
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('team') }}">Team</a></li>
+                <li><a href="{{ url_for('services') }}">Services</a></li>
+                <li><a href="{{ url_for('login') }}" id="getStartedBtn" class="btn btn-primary">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <p>Passionate. Proactive. Expert.</p>
+        <div class="team-container">
+            <div class="team-row">
+                <div class="team-member zoom-box">
+                    <div class="team-member-image">
+                        <img src="{{ url_for('static', filename='img/yash.jpg') }}" alt="Yash Khedkar">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Yash Khedkar</h3>
+                        <p>Team Lead (Data Science & Machine Learning)</p>
+                        
+                        <div class="team-member-social">
+                            <a href="https://www.linkedin.com/in/yashkhedkar25"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member zoom-box">
+                    <div class="team-member-image">
+                        <img src="{{ url_for('static', filename='img/omkar.png') }}" alt="Omkar Bhor">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Omkar Bhor</h3>
+                        <p>Frontend Development,ML & Data Science</p>
+                        <div class="team-member-social">
+                            <a href="https://www.linkedin.com/in/omkar-bhor-736598229"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member zoom-box">
+                    <div class="team-member-image">
+                        <img src="{{ url_for('static', filename='img/tejas.jpg') }}" alt="Tejas Pawar">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Tejas Pawar</h3>
+                        <p>Backend Development</p>
+                        <div class="team-member-social">
+                            <a href="https://www.linkedin.com/in/tejaspawar9523"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-row">
+                <div class="team-member zoom-box">
+                    <div class="team-member-image">
+                        <img src="{{ url_for('static', filename='img/rucha.jpeg') }}" alt="Rucha Patil">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Rucha Patil</h3>
+                        <p>Backend Development</p>
+                        <div class="team-member-social">
+                            <a href="https://www.linkedin.com/in/rucha-patil-7b3589229"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member zoom-box">
+                    <div class="team-member-image">
+                        <img src="{{ url_for('static', filename='img/sayali.jpeg') }}" alt="Sayli Jagdale">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Sayli Jagdale</h3>
+                        <p>Database Management (MySQL)</p>
+                        <div class="team-member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
